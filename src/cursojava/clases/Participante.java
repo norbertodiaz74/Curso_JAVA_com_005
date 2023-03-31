@@ -4,7 +4,8 @@
  */
 package cursojava.clases;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,15 +13,49 @@ import java.util.Arrays;
  */
 public class Participante {
 
+    private int idParticipante;
     private String nombre;
-    private Pronostico[] pronosticos;
+    private List<Pronostico> pronosticos;
+    private int puntaje;
 
     public Participante() {
+        this.idParticipante = 0;
+        this.nombre = null;
+        this.pronosticos = new ArrayList<>();
+        this.puntaje = 0;
     }
 
-    public Participante(String nombre, Pronostico[] pronosticos) {
+    public Participante(int idParticipante, String nombre, List<Pronostico> pronosticos, int puntaje) {
+        this.idParticipante = idParticipante;
         this.nombre = nombre;
         this.pronosticos = pronosticos;
+        this.puntaje = puntaje;
+    }
+
+    public void addPronostico(Pronostico p) {
+        this.pronosticos.add(p);
+    }
+
+    public void cargarPronosticos(int idParticipante) {
+        //cargar pronosticos del participante parámetro
+
+        //cargo la lista completa de pronosticos en lp
+        ListaPronosticos lp = new ListaPronosticos();
+        lp.cargaDeArchivo();
+
+        for (Pronostico p : lp.getPronosticos()) {
+            if (p.getIdParticipante() == idParticipante) {
+                this.addPronostico(p);
+            }
+        }
+    }
+
+    public int getIdParticipante() {
+        return idParticipante;
+    }
+
+    public void setIdParticipante(int idParticipante) {
+        this.idParticipante = idParticipante;
     }
 
     public String getNombre() {
@@ -31,18 +66,25 @@ public class Participante {
         this.nombre = nombre;
     }
 
-    public Pronostico[] getPronosticos() {
+    public List<Pronostico> getPronosticos() {
         return pronosticos;
     }
 
-    public void setPronosticos(Pronostico[] pronosticos) {
+    public void setPronosticos(List<Pronostico> pronosticos) {
         this.pronosticos = pronosticos;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
     }
 
     @Override
     public String toString() {
-        return "Participante{" + "nombre=" + nombre + ", pronosticos=" + Arrays.toString(pronosticos) + '}';
+        return "Participante{" + "idParticipante=" + idParticipante + ", nombre=" + nombre + ", pronosticos=" + pronosticos + ", puntaje=" + puntaje + '}';
     }
-    
-    
+
 }

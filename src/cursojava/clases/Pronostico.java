@@ -10,17 +10,39 @@ package cursojava.clases;
  */
 public class Pronostico {
 
+    private int idPronostico;
+    private int idParticipante; //propiedad agregada por mi, no estaba en modelo
     private Equipo equipo;
     private Partido partido;
     private char resultado;
 
     public Pronostico() {
+        this.idPronostico = 0;
+        this.idParticipante = 0;
+        this.equipo = null;
+        this.partido = null;
+        this.resultado = 'E';
     }
 
-    public Pronostico(Equipo equipo, Partido partido, char resultado) {
+    public Pronostico(int idPronostico, int idParticipante, Equipo equipo, Partido partido, char resultado) {
+        this.idPronostico = idPronostico;
+        this.idParticipante = idParticipante;
         this.equipo = equipo;
         this.partido = partido;
         this.resultado = resultado;
+    }
+
+    public int puntos() {
+        return 1;
+    }
+
+    
+    public int getIdPronostico() {
+        return idPronostico;
+    }
+
+    public void setIdPronostico(int idPronostico) {
+        this.idPronostico = idPronostico;
     }
 
     public Equipo getEquipo() {
@@ -47,9 +69,18 @@ public class Pronostico {
         this.resultado = resultado;
     }
 
+    public int getIdParticipante() {
+        return idParticipante;
+    }
+
+    public void setIdParticipante(int idParticipante) {
+        this.idParticipante = idParticipante;
+    }
+
     @Override
     public String toString() {
-        return "Pronostico{" + "equipo=" + equipo + ", partido=" + partido + ", resultado=" + resultado + '}';
+        return "Pronostico{" + "idPronostico=" + idPronostico + ", idParticipante=" + idParticipante + ", equipo=" + equipo + ", partido=" + partido + ", resultado=" + resultado + '}';
     }
-   
+
+    
 }
