@@ -84,7 +84,8 @@ public class Participante {
 
     @Override
     public String toString() {
-        return "Participante{" + "idParticipante=" + idParticipante + ", nombre=" + nombre + ", pronosticos=" + pronosticos + ", puntaje=" + puntaje + '}';
+        //return "Participante{" + "idParticipante=" + idParticipante + ", nombre=" + nombre + ", pronosticos=" + pronosticos + ", puntaje=" + puntaje + '}';
+        return "idPartici:" + idParticipante + " nombre:" + nombre + ", pronosticos:" + pronosticos + " puntaje=" + puntaje;
     }
 
 }

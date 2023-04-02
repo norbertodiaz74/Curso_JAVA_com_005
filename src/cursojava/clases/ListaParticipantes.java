@@ -7,6 +7,7 @@ package cursojava.clases;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
@@ -97,8 +98,63 @@ public class ListaParticipantes {
     }
 
     public void calcularPuntajes() {
-        for (Participante p : this.getParticipantes()) {
-            
+        //recorrer participantes uno por uno
+        for (Participante participante : this.getParticipantes()) {
+
+            //tomar pronosticos de este participante
+            List<Pronostico> pronosticos = participante.getPronosticos();
+
+            //recorrer cada pronostico del participante
+            int puntaje = 0;//para asignar con cada acierto
+            char resultado;//resultado real del partido
+            char resultado_pronosticado = 'E';//pronostico del participante
+
+            for (Pronostico pronostico : pronosticos) {
+
+                //por cada pronostico, traigo el partido, equipo
+                //y resultado en cuestión
+                Partido partido = pronostico.getPartido();
+                Equipo equipo_pronosticado = pronostico.getEquipo();
+
+                resultado_pronosticado = pronostico.getResultado();
+
+                //verificar el resultado del partido
+                if (partido.getGolesEquipo1() == partido.getGolesEquipo2()) {
+
+                    //el partido está empatado
+                    resultado = 'E';
+                } else {
+                    //uno de los equipos ganó
+
+                    if (partido.getEquipo1().getIdEquipo() == equipo_pronosticado.getIdEquipo()) {
+
+                        //la apuesta es por el primer equipo
+                        if (partido.getGolesEquipo1() > partido.getGolesEquipo2()) {
+                            resultado = 'G';
+                        } else {
+                            resultado = 'P';
+                        }
+                    } else {
+
+                        //la apuesta es por el equipo 2
+                        if (partido.getGolesEquipo2() > partido.getGolesEquipo1()) {
+                            resultado = 'G';
+                        } else {
+                            resultado = 'P';
+                        }
+                    }
+                }
+
+                //comparamos resultado con apuesta
+                if (resultado == resultado_pronosticado) {
+                    //acierto, el participante suma un 
+                    puntaje++;
+                }
+            }
+
+            //asignar puntaje y pasar al siguiente
+            participante.setPuntaje(puntaje);
+
         }
     }
 
@@ -121,9 +177,15 @@ public class ListaParticipantes {
     public String listar() {
         String data = "\n";
         for (Participante p : participantes) {
-            data += "id:" + p.getIdParticipante() + " " + p.getNombre()
-                    + " pronósticos:" + p.getPronosticos()
-                    + " puntaje:" + p.getPuntaje() + "\n";
+            data += p.getNombre() + "\n";
+            data += "sus pronósticos:\n";
+            for (Pronostico pr : p.getPronosticos()) {
+                data += pr.getPartido() + "/" + pr.getEquipo().getNombre()
+                        + " apuesta " + pr.getResultado() + "\n";
+            }
+
+            data += " su puntaje final:" + p.getPuntaje() + "\n"
+                    + "---------------------------------------------------\n";
         }
         return data;
     }

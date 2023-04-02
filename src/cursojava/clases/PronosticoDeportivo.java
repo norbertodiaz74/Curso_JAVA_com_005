@@ -42,6 +42,7 @@ public class PronosticoDeportivo {
         
         // cargar y listar participantes
         participantes.cargaDeArchivo();
+        participantes.calcularPuntajes();
         System.out.println("Los PARTICIPANTES cargados son: " + participantes.listar());
     
          

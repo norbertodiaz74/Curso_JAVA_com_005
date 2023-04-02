@@ -97,12 +97,12 @@ public class ListaPronosticos {
     public String listar() {
         String data = "\n";
         for (Pronostico p : this.pronosticos) {
-            data += "id:" + p.getIdPronostico()
-                    + " idPartic:" + p.getIdParticipante()
-                    + " equipo:" + p.getEquipo().getNombre()
-                    + " partido:" + p.getPartido().getEquipo1().getNombre() + "/"
+          
+            data += p.getPartido().getEquipo1().getNombre() + "/"
                     + p.getPartido().getEquipo2().getNombre()
-                    + " pronóstico:" + p.getResultado() + "\n";
+                    + " sobre " + p.getEquipo().getNombre() + 
+                    " apuesta:"+p.getResultado()
+                    +"\n";
         }
         return data;
     }

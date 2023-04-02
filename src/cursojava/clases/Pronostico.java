@@ -79,7 +79,8 @@ public class Pronostico {
 
     @Override
     public String toString() {
-        return "Pronostico{" + "idPronostico=" + idPronostico + ", idParticipante=" + idParticipante + ", equipo=" + equipo + ", partido=" + partido + ", resultado=" + resultado + '}';
+        //return "Pronostico{" + "idPronostico=" + idPronostico + ", idParticipante=" + idParticipante + ", equipo=" + equipo + ", partido=" + partido + ", resultado=" + resultado + '}';
+        return "idPronos:" + idPronostico + " idParticip:" + idParticipante + " eq:" + equipo + " partido:" + partido + " resultado=" + resultado;
     }
 
     
